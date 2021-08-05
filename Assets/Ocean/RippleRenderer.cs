@@ -54,8 +54,26 @@ public class RippleRenderer : MonoBehaviour {
       reactionDiffusionMaterial.SetInt("_Down", 0 );
     }*/
 
-    reactionDiffusionMaterial.SetVector("_HitUV", new Vector2( (Mathf.Sin(Time.time)) ,(-Mathf.Cos(Time.time))  ) * .1f + Vector2.one * .5f );
-      reactionDiffusionMaterial.SetInt("_Down", 1 );
+
+    RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+        
+        if (Physics.Raycast(ray, out hit)) {
+
+      
+          print(hit.textureCoord);
+          reactionDiffusionMaterial.SetVector("_HitUV", hit.textureCoord );
+          reactionDiffusionMaterial.SetInt("_Down", 1 );
+
+
+        }else{
+              reactionDiffusionMaterial.SetInt("_Down", 0 );
+        }
+
+    //reactionDiffusionMaterial.SetVector("_HitUV", new Vector2( (Mathf.Sin(Time.time)) ,(-Mathf.Cos(Time.time))  ) * .1f + Vector2.one * .5f );
+    //reactionDiffusionMaterial.SetInt("_Down", 1 );
+
 
     for( int i = 0; i < passesPerFrame; i++ ){
       Flip();

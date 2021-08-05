@@ -15,6 +15,7 @@
         Pass
         {
             CGPROGRAM
+
             #pragma vertex vert
             #pragma fragment frag
             
@@ -64,18 +65,132 @@
             float2 _HitUV;
             int _Down;
 
-            float4 newHeight(float2 uv , float3 worldPos ,float texel ) {
+/*
+            // nine-point compact stencil of Laplacian operator
+const float[9] stencil = float[](
+  .05, .20, .05,
+  .20, -1., .20,
+  .05, .20, .05
+);
+
+// relative coordinates of 9x9 grid points
+const float2[9] grid = float2[9](
+    float2(-1.0,  1.0), float2(0.0,  1.0), float2(1.0,  1.0),
+    float2(-1.0,  0.0), float2(0.0,  0.0), float2(1.0,  0.0),
+    float2(-1.0, -1.0), float2(0.0, -1.0), float2(1.0, -1.0)
+);
+
+
+
+float4 sample1(sampler2D channel, vec2 uv) {
+
+    //sample with a lerp based on boundary conditions
+    float2 p = uv;
+
+    float samp1 = tex2D(channel, uv);
+    float depth = tex2D(_DepthTexture,uv).r;
+    return lerp( samp1, float4(0.0, 0.0, 0.0, 1.0), saturate( depth * 100 - 90));
+}
+
+
+// values of a field stored in a texture on the grid
+float[9] getField(sampler2D channel, float2 uv) {
+	vec2 px = 1.0 * _TexelSize.xy;
+    float[9] field;
+    for (int i = 0; i < 9; i++) {
+        float2 r = uv + px * grid[i];
+        field[i] = sample1(channel, r).x;
+    }
+    return field;
+}
+
+// Laplacian of a field
+float laplacian(float[9] samples) {
+    float sum = 0.0;
+    for (int i=0; i<9; i++) {
+        sum += stencil[i] * samples[i];
+    }
+    return sum;
+}
+*/
+float _Stencil[9];
+float2 _Offsets[9];
+//
+//float c = 2.0; // wave speed <= 2
+//float w = 0.2; // emission frequency
+//float damp = 0.995; 
+
+            float4 newHeight(float2 uv ,float texel ) {
 
              // float dif = terrainWorldPos( worldPos ).y - worldPos.y;
 
+         
+            _Stencil[0] = .05;
+            _Stencil[1] = .20; 
+            _Stencil[2] = .05;
+            
+            _Stencil[3] = .20; 
+            _Stencil[4] = -1.0; 
+            _Stencil[5] = .20; 
+
+            _Stencil[6] = .05;
+            _Stencil[7] = .20; 
+            _Stencil[8] = .05;
+
+            _Offsets[0] = float2( -1.0 , 1.0 );
+            _Offsets[1] = float2(  0.0 , 1.0 ); 
+            _Offsets[2] = float2(  1.0 , 1.0 );
+            
+            _Offsets[3] = float2( -1.0 , 0.0 ); 
+            _Offsets[4] = float2(  0.0 , 0.0 );
+            _Offsets[5] = float2(  1.0 , 0.0 ); 
+
+            _Offsets[6] = float2( -1.0 , -1.0 );
+            _Offsets[7] = float2(  0.0 , -1.0 ); 
+            _Offsets[8] = float2(  1.0 , -1.0 );
+
+            /*float sum = 0;
+            sum += tex2D( _LastTex, uv+float2( -1.0 , 1.0 )*.5*_TexelSize.xy).x *.05;
+            sum += tex2D( _LastTex, uv+float2(  0.0 , 1.0 )*.5*_TexelSize.xy).x *.20; 
+            sum += tex2D( _LastTex, uv+float2(  1.0 , 1.0 )*.5*_TexelSize.xy).x *.05;
+            
+            sum += tex2D( _LastTex, uv+float2( -1.0 , 0.0 )*.5*_TexelSize.xy).x *.20; 
+            sum += tex2D( _LastTex, uv+float2(  0.0 , 0.0 )*.5*_TexelSize.xy).x *-1.0;
+            sum += tex2D( _LastTex, uv+float2(  1.0 , 0.0 )*.5*_TexelSize.xy).x *.20; 
+
+            sum += tex2D( _LastTex, uv+float2( -1.0 , -1.0 )*.5*_TexelSize.xy).x *.05;
+            sum += tex2D( _LastTex, uv+float2(  0.0 , -1.0 )*.5*_TexelSize.xy).x *.20; 
+            sum += tex2D( _LastTex, uv+float2(  1.0 , -1.0 )*.5*_TexelSize.xy).x *.05;
+
+*/
+
+            float sum = 0;
+            for( int i =0; i < 9; i++ ){
+                float h = tex2D(_LastTex, uv + _Offsets[i]*_TexelSize.xy  ).x;
+                float d = tex2D(_DepthTexture,uv+_Offsets[i]*_TexelSize.xy).x;
+
+                h = lerp( h , 0 , saturate(d));
+                sum += h * _Stencil[i];
+
+            }
+
+
+
                 float2 c   = tex2D(_LastTex, uv  ).xy;
-
                 float pressure = c.x;
-                float pVel = c.y;
+                float oldPressure = c.y;
+                float dt =.1;
 
+                float val = 2.0 * pressure - oldPressure + .1 * dt * sum; // wave motion
+
+                val *= .9995;
+
+                val = clamp( val , -1,1);
+
+                return  float4(val, pressure, sum, 1.0);// , -10, 10);
 
                 
-
+/*
                 float h_n = tex2D(_LastTex, uv + float2(0., 1.) * _TexelSize.xy ).x;
                 float h_e = tex2D(_LastTex, uv + float2(1., 0.) * _TexelSize.xy ).x;
                 float h_s = tex2D(_LastTex, uv + float2(0., -1.) * _TexelSize.xy ).x;
@@ -91,6 +206,7 @@
                 //float m_w = terrainWorldPos( worldPos  + float3(-1., 0,  0.) * texel* .1).y - worldPos.y;
 
                // if( )
+
 
                const float delta = .1;
                 float edge = 0;
@@ -121,24 +237,28 @@
     pVel *= 1.0 - 0.0005 * delta;
     
     // Pressure damping to prevent it from building up forever.
-    pressure *= 0.999999;
+    pressure *= 0.999;*/
           
 
-                return float4(pressure, pVel , (h_e - h_w) / 2.0, (h_n- h_s) / 2.0);
-
+   /* if( _Time.y % 1000 > .1 ){
+                return float4(val, pressure, sum, 1.0);
+    }else{
+            return float4(0,0,0,1);
+    }*/
             }
 
             fixed4 frag (v2f v) : SV_Target
             {
         
-                    float4 result = newHeight(v.uv , v.worldPos - float3(.5,0,.5) , v.texel);
+                    float4 result = newHeight(v.uv , v.texel);
 
 
                     if( length(v.uv-_HitUV) < .01 && _Down == 1 ){
-                        result.x += (.01- length(v.uv-_HitUV)) * 5;
+                       // result.x += (.01- length(v.uv-_HitUV))*100;
+                        result.x =  saturate((.01- length(v.uv-_HitUV))*1000);
                     }
 
-
+                    result.z = (result.x - result.y ) * 100;
                    // float tPos = terrainWorldPos( v.worldPos ).y- v.worldPos.y;
 
                     return result;//fixed4(result.x , result.y  ,1, 1.0);
