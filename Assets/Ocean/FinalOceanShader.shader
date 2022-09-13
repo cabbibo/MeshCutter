@@ -5,7 +5,8 @@ Shader "Unlit/FinalOceanShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _DepthTextureture ("Texture", 2D) = "white" {}
+        _FoamTexture ("Foam Texture", 2D) = "white" {}
+        _DepthTexture ("Texture", 2D) = "white" {}
     }
     SubShader
     {
@@ -42,6 +43,7 @@ GrabPass { "_WaterBackground" }
 
             sampler2D _MainTex;
             sampler2D _DepthTexture;
+            sampler2D _FoamTexture;
 
             float _Size;
 
@@ -102,14 +104,33 @@ float2 uv =(screenPos.xy) / screenPos.w;
 
         float m = -dot( eye , v.normal);
 
+        float upness = dot( v.normal, float3(0,1,0));
+
 
 
 
 
                 // sample the texture
-                //fixed4 col = tex2D(_MainTex, i.uv);
-                fixed4 col = tex2D(_DepthTexture, v.uv);
-                col = lerp( bgCol , float4(0,0,1,0) , saturate(depthDifference));
+                fixed4 rippleCol = tex2D(_MainTex, v.uv);
+                fixed4 depthCol = tex2D(_DepthTexture, v.uv);
+
+                fixed4 col = 0;
+
+                    col = lerp( bgCol , float4(0,0,1,0) , saturate(depthDifference));
+              
+
+              
+                    fixed4 foamCol = tex2D(_FoamTexture, v.uv * 30 * upness);
+
+                    float rip = rippleCol.r * 20 +depthCol.r ;
+                if( rip>.9){
+
+
+
+                    col += saturate(foamCol.r *foamCol.r *foamCol.r *foamCol.r * 10 * (rip-.9) * 10);
+
+                }
+                //col = foamCol;
                 //col = bgCol;
                 //col.r-= v.ripple * .3;//rippleTex;
 

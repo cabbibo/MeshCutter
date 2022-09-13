@@ -1,0 +1,766 @@
+{
+
+ "Version" : 1,
+ "Sequence" : {
+  "Metadata" : {
+   "Title" : "Untitled",
+   "Description" : "Shared from Quill",
+   "ThumbnailCropPosition" : 0.122091
+  },
+  "Gallery" : {
+   "Thumbnails" : {
+    "Picture_2D_Type1" : 6
+   },
+   "Pictures" : [
+    {
+     "Type" : "2D",
+     "DataFileOffset" : "0000000000000008",
+     "Metadata" : {
+     }
+    },
+    {
+     "Type" : "2D",
+     "DataFileOffset" : "00000000005eec1c",
+     "Metadata" : {
+     }
+    },
+    {
+     "Type" : "2D",
+     "DataFileOffset" : "0000000000bdd830",
+     "Metadata" : {
+     }
+    },
+    {
+     "Type" : "2D",
+     "DataFileOffset" : "00000000011cc444",
+     "Metadata" : {
+     }
+    },
+    {
+     "Type" : "2D",
+     "DataFileOffset" : "00000000017bb058",
+     "Metadata" : {
+     }
+    },
+    {
+     "Type" : "2D",
+     "DataFileOffset" : "0000000001da9c6c",
+     "Metadata" : {
+     }
+    },
+    {
+     "Type" : "2D",
+     "DataFileOffset" : "0000000002398880",
+     "Metadata" : {
+     }
+    }
+   ]
+  },
+  "BackgroundColor" : [0.272755,0.348331,0.422002],
+  "DefaultViewpoint" : "Root/InitialSpawnArea",
+  "Framerate" : 24,
+  "ExportStart" : 0,
+  "ExportEnd" : 126000,
+  "CameraResolution" : [
+   1920,
+   1080],
+  "RootLayer" : {
+   "Name" : "Root",
+   "Visible" : true,
+   "Locked" : false,
+   "Collapsed" : false,
+   "BBoxVisible" : false,
+   "Opacity" : 1.000000,
+   "Type" : "Group",
+   "IsModelTopLayer" : false,
+   "KeepAlive" : {
+    "Type" : "None"
+   },
+   "Transform" : {
+    "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+    "Scale" : 1.0000000000000000e+00,
+    "Flip" : "N",
+    "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+   },
+   "Pivot" : {
+    "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+    "Scale" : 1.0000000000000000e+00,
+    "Flip" : "N",
+    "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+   },
+   "Animation" : {
+    "Duration" : "45360000",
+    "Timeline" : true,
+    "StartOffset" : "0",
+    "MaxRepeatCount" : "0",
+    "Keys" : {
+     "Visibility" : [
+      {
+       "Time" : "0",
+       "Value" : true,
+       "Interpolation" : "None"
+      }],
+     "Offset" : [
+      {
+       "Time" : "0",
+       "Value" : 0,
+       "Interpolation" : "None"
+      }]
+    }
+   },
+   "Implementation" : {
+    "Children" : [
+     {
+      "Name" : "Water",
+      "Visible" : true,
+      "Locked" : true,
+      "Collapsed" : false,
+      "BBoxVisible" : false,
+      "Opacity" : 0.285023,
+      "Type" : "Paint",
+      "IsModelTopLayer" : false,
+      "KeepAlive" : {
+       "Type" : "None"
+      },
+      "Transform" : {
+       "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+       "Scale" : 1.0000000000000000e+00,
+       "Flip" : "N",
+       "Translation" : [0.0000000000000000e+00,-2.5443306141260251e+00,0.0000000000000000e+00]
+      },
+      "Pivot" : {
+       "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+       "Scale" : 1.0000000000000000e+00,
+       "Flip" : "N",
+       "Translation" : [-2.3080768585205078e+00,-1.0758972167968750e-01,1.6087436676025396e-01]
+      },
+      "Animation" : {
+       "Duration" : "0",
+       "Timeline" : false,
+       "StartOffset" : "0",
+       "MaxRepeatCount" : "0",
+       "Keys" : {
+        "Visibility" : [
+         {
+          "Time" : "0",
+          "Value" : true,
+          "Interpolation" : "None"
+         }],
+        "Offset" : [
+         {
+          "Time" : "0",
+          "Value" : 0,
+          "Interpolation" : "None"
+         }]
+       }
+      },
+      "Implementation" : {
+       "Framerate" : 24,
+       "MaxRepeatCount" : 1,
+       "Drawings" : [
+        {
+         "BoundingBox" : [-51.731239,47.113972,-49.578148,48.392017,-98.226532,98.407555],
+         "DataFileOffset" : "0000000002987494"
+        }],
+       "Frames" : [
+        "0"]
+      }
+     },
+     {
+      "Name" : "InitialSpawnArea",
+      "Visible" : false,
+      "Locked" : false,
+      "Collapsed" : false,
+      "BBoxVisible" : false,
+      "Opacity" : 1.000000,
+      "Type" : "Viewpoint",
+      "IsModelTopLayer" : false,
+      "KeepAlive" : {
+       "Type" : "None"
+      },
+      "Transform" : {
+       "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+       "Scale" : 1.0000000000000000e+00,
+       "Flip" : "N",
+       "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+      },
+      "Pivot" : {
+       "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+       "Scale" : 1.0000000000000000e+00,
+       "Flip" : "N",
+       "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+      },
+      "Animation" : {
+       "Duration" : "0",
+       "Timeline" : false,
+       "StartOffset" : "0",
+       "MaxRepeatCount" : "0",
+       "Keys" : {
+        "Visibility" : [
+         {
+          "Time" : "0",
+          "Value" : true,
+          "Interpolation" : "None"
+         }],
+        "Offset" : [
+         {
+          "Time" : "0",
+          "Value" : 0,
+          "Interpolation" : "None"
+         }]
+       }
+      },
+      "Implementation" : {
+       "Version" : 1,
+       "Color" : [0.384097,0.472516,0.825875],
+       "Sphere" : [0.000000,1.000000,0.000000,2.000000],
+       "AllowTranslationX" : true,
+       "AllowTranslationY" : true,
+       "AllowTranslationZ" : true,
+       "Exporting" : true,
+       "ShowingVolume" : false,
+       "TypeStr" : "FloorLevel"
+      }
+     },
+     {
+      "Name" : "sky",
+      "Visible" : true,
+      "Locked" : true,
+      "Collapsed" : false,
+      "BBoxVisible" : false,
+      "Opacity" : 1.000000,
+      "Type" : "Paint",
+      "IsModelTopLayer" : false,
+      "KeepAlive" : {
+       "Type" : "None"
+      },
+      "Transform" : {
+       "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+       "Scale" : 1.0000000000000000e+00,
+       "Flip" : "N",
+       "Translation" : [0.0000000000000000e+00,2.2861165818671299e+02,-1.5291825064915145e+01]
+      },
+      "Pivot" : {
+       "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+       "Scale" : 1.0000000000000000e+00,
+       "Flip" : "N",
+       "Translation" : [-3.9579116821289063e+01,-2.9443250656127930e+02,-1.6724700927734379e+01]
+      },
+      "Animation" : {
+       "Duration" : "0",
+       "Timeline" : false,
+       "StartOffset" : "0",
+       "MaxRepeatCount" : "0",
+       "Keys" : {
+        "Visibility" : [
+         {
+          "Time" : "0",
+          "Value" : true,
+          "Interpolation" : "None"
+         }],
+        "Offset" : [
+         {
+          "Time" : "0",
+          "Value" : 0,
+          "Interpolation" : "None"
+         }]
+       }
+      },
+      "Implementation" : {
+       "Framerate" : 24,
+       "MaxRepeatCount" : 1,
+       "Drawings" : [
+        {
+         "BoundingBox" : [-543.857422,464.699188,-667.786926,78.921913,-570.743896,537.294495],
+         "DataFileOffset" : "00000000029882f8"
+        }],
+       "Frames" : [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"]
+      }
+     },
+     {
+      "Name" : "NewLayer2",
+      "Visible" : true,
+      "Locked" : false,
+      "Collapsed" : false,
+      "BBoxVisible" : false,
+      "Opacity" : 1.000000,
+      "Type" : "Paint",
+      "IsModelTopLayer" : false,
+      "KeepAlive" : {
+       "Type" : "None"
+      },
+      "Transform" : {
+       "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+       "Scale" : 1.0000000000000000e+00,
+       "Flip" : "N",
+       "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+      },
+      "Pivot" : {
+       "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+       "Scale" : 1.0000000000000000e+00,
+       "Flip" : "N",
+       "Translation" : [-5.2349109649658203e+00,3.8654193878173828e+00,-3.2299308776855469e+00]
+      },
+      "Animation" : {
+       "Duration" : "0",
+       "Timeline" : false,
+       "StartOffset" : "0",
+       "MaxRepeatCount" : "0",
+       "Keys" : {
+        "Visibility" : [
+         {
+          "Time" : "0",
+          "Value" : true,
+          "Interpolation" : "None"
+         }],
+        "Offset" : [
+         {
+          "Time" : "0",
+          "Value" : 0,
+          "Interpolation" : "None"
+         }]
+       }
+      },
+      "Implementation" : {
+       "Framerate" : 24,
+       "MaxRepeatCount" : 1,
+       "Drawings" : [
+        {
+         "BoundingBox" : [-44.691704,34.221882,-18.911175,26.642014,-42.082088,35.622227],
+         "DataFileOffset" : "0000000002b2284c"
+        }],
+       "Frames" : [
+        "0"]
+      }
+     },
+     {
+      "Name" : "NewGroup0",
+      "Visible" : false,
+      "Locked" : true,
+      "Collapsed" : true,
+      "BBoxVisible" : false,
+      "Opacity" : 1.000000,
+      "Type" : "Group",
+      "IsModelTopLayer" : false,
+      "KeepAlive" : {
+       "Type" : "None"
+      },
+      "Transform" : {
+       "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+       "Scale" : 1.0000000000000000e+00,
+       "Flip" : "N",
+       "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+      },
+      "Pivot" : {
+       "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+       "Scale" : 1.0000000000000000e+00,
+       "Flip" : "N",
+       "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+      },
+      "Animation" : {
+       "Duration" : "0",
+       "Timeline" : false,
+       "StartOffset" : "0",
+       "MaxRepeatCount" : "0",
+       "Keys" : {
+        "Visibility" : [
+         {
+          "Time" : "0",
+          "Value" : true,
+          "Interpolation" : "None"
+         }],
+        "Offset" : [
+         {
+          "Time" : "0",
+          "Value" : 0,
+          "Interpolation" : "None"
+         }]
+       }
+      },
+      "Implementation" : {
+       "Children" : [
+        {
+         "Name" : "lighthouseref_05.jpg",
+         "Visible" : true,
+         "Locked" : true,
+         "Collapsed" : false,
+         "BBoxVisible" : false,
+         "Opacity" : 1.000000,
+         "Type" : "Picture",
+         "IsModelTopLayer" : false,
+         "KeepAlive" : {
+          "Type" : "None"
+         },
+         "Transform" : {
+          "Rotation" : [4.3558654628565652e-01,-6.3148689873973951e-01,2.9735708893587037e-01,5.6839019966444226e-01],
+          "Scale" : 5.3659386934574096e+00,
+          "Flip" : "N",
+          "Translation" : [-4.1214544672597100e+00,3.2668849787618150e+01,3.1299750388717982e+00]
+         },
+         "Pivot" : {
+          "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+          "Scale" : 1.0000000000000000e+00,
+          "Flip" : "N",
+          "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+         },
+         "Animation" : {
+          "Duration" : "0",
+          "Timeline" : false,
+          "StartOffset" : "0",
+          "MaxRepeatCount" : "0",
+          "Keys" : {
+           "Visibility" : [
+            {
+             "Time" : "0",
+             "Value" : true,
+             "Interpolation" : "None"
+            }],
+           "Offset" : [
+            {
+             "Time" : "0",
+             "Value" : 0,
+             "Interpolation" : "None"
+            }]
+          }
+         },
+         "Implementation" : {
+          "Type" : "2D",
+          "ViewerLocked" : false,
+          "DataFileOffset" : "00000000035050a8",
+          "ImportFilePath" : "C:/Users/wesle/Desktop/lighthouseref_05.jpg"
+         }
+        },
+        {
+         "Name" : "lighthouseref_06.jpg",
+         "Visible" : true,
+         "Locked" : true,
+         "Collapsed" : false,
+         "BBoxVisible" : false,
+         "Opacity" : 1.000000,
+         "Type" : "Picture",
+         "IsModelTopLayer" : false,
+         "KeepAlive" : {
+          "Type" : "None"
+         },
+         "Transform" : {
+          "Rotation" : [3.4370061685088676e-01,-4.4913295553924082e-01,3.7304728540232585e-01,7.3551695906951187e-01],
+          "Scale" : 5.4056051554647055e+00,
+          "Flip" : "N",
+          "Translation" : [-5.7038297455093154e+00,3.3239777071284628e+01,-5.0399366353496609e+00]
+         },
+         "Pivot" : {
+          "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+          "Scale" : 1.0000000000000000e+00,
+          "Flip" : "N",
+          "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+         },
+         "Animation" : {
+          "Duration" : "0",
+          "Timeline" : false,
+          "StartOffset" : "0",
+          "MaxRepeatCount" : "0",
+          "Keys" : {
+           "Visibility" : [
+            {
+             "Time" : "0",
+             "Value" : true,
+             "Interpolation" : "None"
+            }],
+           "Offset" : [
+            {
+             "Time" : "0",
+             "Value" : 0,
+             "Interpolation" : "None"
+            }]
+          }
+         },
+         "Implementation" : {
+          "Type" : "2D",
+          "ViewerLocked" : false,
+          "DataFileOffset" : "00000000036310bc",
+          "ImportFilePath" : "C:/Users/wesle/Desktop/lighthouseref_06.jpg"
+         }
+        },
+        {
+         "Name" : "lighthouseref_01.jpg",
+         "Visible" : true,
+         "Locked" : true,
+         "Collapsed" : false,
+         "BBoxVisible" : false,
+         "Opacity" : 1.000000,
+         "Type" : "Picture",
+         "IsModelTopLayer" : false,
+         "KeepAlive" : {
+          "Type" : "None"
+         },
+         "Transform" : {
+          "Rotation" : [8.5333060762815341e-02,-6.2396053164512411e-01,1.1955971333112572e-01,7.6752654588500246e-01],
+          "Scale" : 3.5867478273477120e+00,
+          "Flip" : "N",
+          "Translation" : [9.9784608098395289e-01,2.8125990704221326e+01,-1.5094506381315922e+00]
+         },
+         "Pivot" : {
+          "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+          "Scale" : 1.0000000000000000e+00,
+          "Flip" : "N",
+          "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+         },
+         "Animation" : {
+          "Duration" : "0",
+          "Timeline" : false,
+          "StartOffset" : "0",
+          "MaxRepeatCount" : "0",
+          "Keys" : {
+           "Visibility" : [
+            {
+             "Time" : "0",
+             "Value" : true,
+             "Interpolation" : "None"
+            }],
+           "Offset" : [
+            {
+             "Time" : "0",
+             "Value" : 0,
+             "Interpolation" : "None"
+            }]
+          }
+         },
+         "Implementation" : {
+          "Type" : "2D",
+          "ViewerLocked" : false,
+          "DataFileOffset" : "00000000037120d0",
+          "ImportFilePath" : "C:/Users/wesle/Desktop/lighthouseref_01.jpg"
+         }
+        },
+        {
+         "Name" : "lighthouseref_00.jpg",
+         "Visible" : true,
+         "Locked" : true,
+         "Collapsed" : false,
+         "BBoxVisible" : false,
+         "Opacity" : 1.000000,
+         "Type" : "Picture",
+         "IsModelTopLayer" : false,
+         "KeepAlive" : {
+          "Type" : "None"
+         },
+         "Transform" : {
+          "Rotation" : [-5.5929342285094406e-02,-1.6336240956190767e-01,1.9660800460892996e-01,9.6515797895338318e-01],
+          "Scale" : 2.8142797177922536e+00,
+          "Flip" : "N",
+          "Translation" : [-4.8149027683050427e+00,2.4964512761373395e+01,-1.0180622346891449e+01]
+         },
+         "Pivot" : {
+          "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+          "Scale" : 1.0000000000000000e+00,
+          "Flip" : "N",
+          "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+         },
+         "Animation" : {
+          "Duration" : "0",
+          "Timeline" : false,
+          "StartOffset" : "0",
+          "MaxRepeatCount" : "0",
+          "Keys" : {
+           "Visibility" : [
+            {
+             "Time" : "0",
+             "Value" : true,
+             "Interpolation" : "None"
+            }],
+           "Offset" : [
+            {
+             "Time" : "0",
+             "Value" : 0,
+             "Interpolation" : "None"
+            }]
+          }
+         },
+         "Implementation" : {
+          "Type" : "2D",
+          "ViewerLocked" : false,
+          "DataFileOffset" : "000000000384287e",
+          "ImportFilePath" : "C:/Users/wesle/Desktop/lighthouseref_00.jpg"
+         }
+        },
+        {
+         "Name" : "?lighthouseref_04.jpg",
+         "Visible" : true,
+         "Locked" : true,
+         "Collapsed" : false,
+         "BBoxVisible" : false,
+         "Opacity" : 1.000000,
+         "Type" : "Picture",
+         "IsModelTopLayer" : false,
+         "KeepAlive" : {
+          "Type" : "None"
+         },
+         "Transform" : {
+          "Rotation" : [6.7698137616967080e-02,-4.8229777311728278e-01,2.0514706294920301e-01,8.4895259159308778e-01],
+          "Scale" : 2.5599875972184303e+00,
+          "Flip" : "N",
+          "Translation" : [-5.4628749906024676e-01,2.6961571286686098e+01,-6.6552447655219851e+00]
+         },
+         "Pivot" : {
+          "Rotation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00,1.0000000000000000e+00],
+          "Scale" : 1.0000000000000000e+00,
+          "Flip" : "N",
+          "Translation" : [0.0000000000000000e+00,0.0000000000000000e+00,0.0000000000000000e+00]
+         },
+         "Animation" : {
+          "Duration" : "0",
+          "Timeline" : false,
+          "StartOffset" : "0",
+          "MaxRepeatCount" : "0",
+          "Keys" : {
+           "Visibility" : [
+            {
+             "Time" : "0",
+             "Value" : true,
+             "Interpolation" : "None"
+            }],
+           "Offset" : [
+            {
+             "Time" : "0",
+             "Value" : 0,
+             "Interpolation" : "None"
+            }]
+          }
+         },
+         "Implementation" : {
+          "Type" : "2D",
+          "ViewerLocked" : false,
+          "DataFileOffset" : "0000000003a82892",
+          "ImportFilePath" : "C:/Users/wesle/Desktop/?lighthouseref_04.jpg"
+         }
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ }
+}

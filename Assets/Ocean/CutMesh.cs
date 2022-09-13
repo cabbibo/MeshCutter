@@ -56,6 +56,23 @@ public  class CutMesh{
     }
 
 
+    
+    public static Mesh CutMeshWithPlanes( Mesh inMesh , Transform[] planes ){
+
+        inputMesh = inMesh;
+
+        Reset();
+        for( int i =0; i < planes.Length; i++){
+            Cut( planes[i] );
+        }
+        Flatten();
+
+        return mesh;
+
+    }
+
+
+
     /*public void OnEnable(){
        
        
@@ -66,6 +83,358 @@ public  class CutMesh{
         Cut( cutPlane );
         Flatten();
     }*/
+
+
+    public static void CreateMeshCutProcess( Mesh inMesh , Transform plane  ){
+        
+        inputMesh = inMesh;
+        Reset();
+        SetUpCut( plane );
+
+    }
+
+
+    public static int currentCutFace = 0;
+    public int totalFacesToCut;
+    public  static Transform cuttingPlane;
+
+    public  static bool currentlyCutting;
+
+     static List<Vector3> newPoints;
+
+    public static Vector3 cutPosition;
+    public static Vector3 cutUp;
+
+
+    public static int processState; 
+
+    public static int currentEdgeGroup;
+
+    public static bool processing;
+
+    public static Mesh finalMesh;
+    public static bool finishedProcessing;
+    public static void SetUpCut( Transform plane ){
+       
+        cutPlane = plane;
+        currentlyCutting = true;
+        currentCutFace = faces.Count-1;
+
+
+        currentCutPlane = cutPlane;
+        cutPosition = cutPlane.position;
+        cutUp = cutPlane.up;
+
+        currentCutPosition = cutPosition;
+        currentCutUp = cutUp;
+
+    
+
+        // First off, we make a new list of points that we will populate
+        // with the points that are going to make up the new face 
+        // that will be added from the plane cut
+        newPoints = new List<Vector3>();
+
+        processState = 0;
+
+        currentEdgeGroup = 0;
+
+        processing = true;
+        finishedProcessing = false;
+        finalMesh = null;
+
+
+
+    }
+
+
+
+    public static float amountInProcessState;
+    public static void Process(){
+
+
+        if( processing ){
+        
+            if( processState == 0){
+                AddCutPointsForFace( currentCutFace );
+                currentCutFace --;
+                //Debug.Log(currentCutFace);
+
+                amountInProcessState = 1 - ((float)currentCutFace/(faces.Count));
+
+
+
+                if( currentCutFace < 0 ){
+                    processState = 1;
+                }
+            }
+
+            /*if( processingState == 1 ){
+                RemoveDuplicateFaces();
+            }*/
+
+
+            int fullCount = 0;
+
+            if( processState == 1 ){
+                SetUpEdgeGroups();
+                amountInProcessState = 1;
+                processState = 2;
+                fullCount = newEdges.Count;
+                
+            }
+
+        
+
+            if( processState == 2 ){
+
+                if( newEdges.Count > 0 ){
+                    amountInProcessState = 1- ((float)newEdges.Count/(float)fullCount);
+                    List<edge> eg = MakeEdgeGroup(newEdges);
+                    edgeGroupings.Add(eg);
+                    
+                }else{
+                    processState = 3;
+                }
+                
+            }
+
+            if( processState == 3 ){
+
+
+                AddEdgeGroupFace(currentEdgeGroup);
+                currentEdgeGroup ++;
+
+                amountInProcessState = (float)currentEdgeGroup / (float)edgeGroupings.Count;
+
+                if( currentEdgeGroup ==  edgeGroupings.Count ){
+                    processState = 4;
+                }
+
+            }
+
+
+            if( processState == 4 ){
+                GetAllNewPoints();
+                processState = 5;
+                amountInProcessState = 1;
+            }
+
+            if( processState == 5 ){
+                Flatten();
+                processing = false;
+                finishedProcessing = true;
+                amountInProcessState = 1;
+            }
+
+        }
+
+    }
+
+
+
+ static int edgeCount;
+ static int totalSame;
+
+ static bool[] edgeComplete;
+
+
+
+public static void RemoveDuplicateFaces(){
+
+}
+public static void GetAllNewPoints(){
+     if( newPoints.Count != 0 ){
+
+        int same= 0;
+        for(int i = 0;  i< newPoints.Count; i++ ){
+            for( int j = 0; j < newPoints.Count; j++ ){
+        
+                if( newPoints[i] == newPoints[j] && i != j){
+                    same ++;
+                }
+            }
+        }
+
+        //print("SAME: " + same);
+
+
+
+        float[] angles = new float[ newPoints.Count ];
+
+
+    Vector4[] full = new Vector4[newPoints.Count];
+
+
+    // getting the centroid to compare angles too
+    Vector3 centroid = new Vector3();
+    for(int i = 0;  i< newPoints.Count; i++ ){
+        centroid += newPoints[i];
+    }
+
+    centroid /= newPoints.Count;
+
+    Vector3 startingVec = newPoints[0] - centroid;
+    Vector3 perp = Vector3.Cross( startingVec , cutUp );
+
+    // looping through and assigning all our points with
+    // an addition 'angle' for order usage
+    full[0] = newPoints[0];
+    for(int i = 0; i < newPoints.Count; i++ ){
+
+        float a = GetAngleBetween( newPoints[i] - centroid , startingVec , perp.normalized );
+        full[i] = fullVec( newPoints[i] ,  a);
+
+    }
+
+    // here we sort the array by the actual angle
+    Array.Sort(full, Vector4Compare);    
+    Array.Reverse(full);
+
+    // And then we reassign the sorted points
+    for(int i = 0; i< newPoints.Count; i++ ){
+        newPoints[i] = new Vector3( full[i].x , full[i].y , full[i].z);
+    }
+
+    //faces.Add( newPoints );
+
+}
+}
+    public static void AddEdgeGroupFace(int i){
+              List<edge> eg = edgeGroupings[i];
+            List<Vector3> facePoints = new List<Vector3>();
+
+            float3 centroid = 0;
+            for( var j= 0; j < eg.Count; j++){
+
+                centroid += eg[j].p1;
+            }
+
+            centroid /= eg.Count;
+
+            
+
+            for( var j= 0; j < eg.Count; j++){
+                
+
+                //print( eg[j].p2 * 100);
+                //print( eg[(j+1)%eg.Count].p1 * 100 );
+                facePoints.Add( new Vector3(eg[j].p2.x,eg[j].p2.y,eg[j].p2.z));
+
+               // print( math.length( centroid-eg[j].p1 ));
+
+            }
+
+        
+
+            faces.Add( facePoints );
+    }
+    public static void SetUpEdgeGroups(){
+        
+        edgeCount = newEdges.Count;
+        totalSame = 0;
+
+        edgeGroupings = new List<List<edge>>();
+        edgeComplete = new bool[edgeCount];
+
+        
+        newEdgeCopy = new List<edge>(newEdges);
+
+
+    }
+
+    public static void AddCutPointsForFace(int id){
+        
+            var face = faces[id];
+
+            // we will recreate the face by adding
+            // only the points that are not cut! 
+            List<Vector3> newFace = new List<Vector3>();
+
+            List<Vector3> newCutPoints = new List<Vector3>();
+
+   
+
+            for( int i = 0; i < face.Count; i++ ){
+            
+                // Get two neighboring points in the face to see if they 
+                // intersect the plane
+                var p1 = face[i];
+                var p2 = face[(i+1)%face.Count];
+
+                if( p1 != p2 ){
+                    
+
+                    // Check both to see if they above the cut plane
+                    bool p1Above = aboveCutPlane( p1 , cutPosition , cutUp);
+                    bool p2Above = aboveCutPlane( p2 , cutPosition , cutUp);
+
+
+
+                    
+                    // if both below than its fine to just add this edge!
+                    if( p1Above == false  && p2Above == false ){
+                        SafeAdd(newFace,p1 );
+                    } 
+
+                    // If both points are above, then we arent
+                    // goint to save either point
+                    if( p1Above == true && p2Above == true ){
+
+                    }
+
+
+                    // If the cut plane intersects our edge
+                    // then we need to add a new point which 
+                    // exists on the cut plane
+                    if( p1Above == true  && p2Above == false ){
+                        // add projected p1 to the face list
+                        Vector3 newPos = projectPoint(p1 , p2, cutPosition , cutUp);
+
+                         SafeAdd(newFace,newPos ); 
+
+
+                         // adding a new point to our list of new points
+                         // for later use in creating the generated face
+                         //SafeAdd(newPoints,newPos );
+
+                         newCutPoints.Add(newPos);
+
+
+
+                    }
+
+                    // If the cut plane intersects our edge
+                    // then we need to add a new point which 
+                    // exists on the cut plane
+                    if( p1Above == false && p2Above  == true ){
+                        SafeAdd(newFace,p1);
+                        SafeAdd(newFace,projectPoint(p2,p1, cutPosition , cutUp));
+                        newCutPoints.Add( projectPoint(p2,p1, cutPosition , cutUp));
+                    }
+                }
+            }
+
+
+            if( newFace.Count == 0 ){
+                faces.RemoveAt(id);   
+            }else{
+                faces[id] = newFace;
+            }
+
+            if( newCutPoints.Count == 2 ){
+               edge e = new edge();
+               e.p1 = newCutPoints[0];
+               e.p2 = newCutPoints[1];
+                newEdges.Add(e);
+            }else if( newCutPoints.Count > 2 ){
+                //print("NO NO NO NO NO ");
+            }
+
+            //print( newCutPoints.Count );
+    }
+
+
 
 
 
@@ -144,6 +513,28 @@ public  class CutMesh{
 
     static Vector3 currentCutPosition;
     static Vector3 currentCutUp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
+
+        CUT
+
+
+
+    */
 
     // This is where the MAGIC happens, ill try and comment line line
     static void Cut( Transform cutPlane){
@@ -243,7 +634,7 @@ public  class CutMesh{
                edge e = new edge();
                e.p1 = newCutPoints[0];
                e.p2 = newCutPoints[1];
-                newEdges.Add(e);
+               newEdges.Add(e);
             }else if( newCutPoints.Count > 2 ){
                 //print("NO NO NO NO NO ");
             }
@@ -255,14 +646,14 @@ public  class CutMesh{
 
 
 
-//        print("NEW EDGES" + newEdges.Count );
-
+        //        print("NEW EDGES" + newEdges.Count );
         int edgeCount = newEdges.Count;
         int totalSame = 0;
     
 
         edgeGroupings = new List<List<edge>>();
         var edgeComplete = new bool[edgeCount];
+        /*
 
         for( var i = 0; i < newEdges.Count; i++ ){
             //print( newEdges[0].p1.y );
@@ -285,27 +676,23 @@ public  class CutMesh{
                            if( (Vector3)e1.p2 == (Vector3)e2.p2){
                             //print( "edgeEqual: " + j );
                         }
-                        
-                        
+                                
                     }
-
-
                 }
             }
-        }
+        }*/
         
 
         //print( newEdges.Count );
 
         newEdgeCopy = new List<edge>(newEdges);
         while( newEdges.Count > 0 ){
-            //print("Trying");
             List<edge> eg = MakeEdgeGroup(newEdges);
-           //print("EG C: " + eg.Count);
            edgeGroupings.Add(eg);
         }
 
-        //print( edgeGroupings.Count);
+
+
 
 
         for( var i = 0; i < edgeGroupings.Count; i++ ){
@@ -317,9 +704,6 @@ public  class CutMesh{
             for( var j= 0; j < eg.Count; j++){
 
                 centroid += eg[j].p1;
-
-                
-
             }
 
             centroid /= eg.Count;
@@ -736,7 +1120,7 @@ print("Concave :"+ totalConcave);
         mesh.normals = allTriNorms.ToArray();
         mesh.triangles = allTriIDs.ToArray();
 
-        Debug.Log("MESH VERT COUNT: " + mesh.vertices.Length );
+//        Debug.Log("MESH VERT COUNT: " + mesh.vertices.Length );
         //GetComponent<MeshFilter>().mesh = mesh;
 
     }
